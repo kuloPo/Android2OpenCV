@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 H264_Stream_Decode::H264_Stream_Decode(FILE* f) {
-	this->f = f;
+    this->f = f;
     memset(inbuf + INBUF_SIZE, 0, AV_INPUT_BUFFER_PADDING_SIZE);
 
     pkt = av_packet_alloc();

@@ -14,7 +14,7 @@ extern "C" {
 
 class H264_Stream_Decode {
 public:
-	H264_Stream_Decode(FILE* f);
+    H264_Stream_Decode(FILE* f);
     ~H264_Stream_Decode();
     bool next();
     cv::Mat get_frame();
@@ -23,7 +23,7 @@ private:
     bool decode();
 
 private:
-	FILE* f;
+    FILE* f;
     const AVCodec* codec;
     AVCodecParserContext* parser;
     AVCodecContext* dec_ctx = NULL;
