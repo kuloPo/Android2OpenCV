@@ -38,6 +38,7 @@ H264_Stream_Decode::H264_Stream_Decode(FILE* f) {
     sws_ctx = nullptr;
     frame_BGR = nullptr;
     frame_buffer = nullptr;
+    data_size = 0;
 }
 
 H264_Stream_Decode::~H264_Stream_Decode() {
