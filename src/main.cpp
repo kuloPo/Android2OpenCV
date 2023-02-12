@@ -1,4 +1,5 @@
 #include "h264.h"
+#include <errno.h>
 
 int main(int argc, char** argv) {
     const char* cmd = "adb exec-out \"while true; do screenrecord --output-format=h264 -; done\"";
@@ -8,6 +9,10 @@ int main(int argc, char** argv) {
 #else 
     f = popen(cmd, "r");
 #endif
+    if (!f) {
+        fprintf(stderr, "Error when starting adb subsession: %s\n", strerror(errno));
+        return 1;
+    }
     
     H264_Stream_Decode decoder(f);
     cv::Mat frame;
