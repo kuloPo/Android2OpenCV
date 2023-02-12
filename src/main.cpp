@@ -1,7 +1,13 @@
 #include "h264.h"
 
 int main(int argc, char** argv) {
-    FILE* f = _popen("adb exec-out \"while true; do screenrecord --output-format=h264 -; done\"", "rb");
+    const char* cmd = "adb exec-out \"while true; do screenrecord --output-format=h264 -; done\"";
+    FILE* f = nullptr;
+#ifdef WIN32
+    f = _popen(cmd, "rb");
+#else 
+    f = popen(cmd, "r");
+#endif
     
     H264_Stream_Decode decoder(f);
     cv::Mat frame;
