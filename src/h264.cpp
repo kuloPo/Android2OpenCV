@@ -57,7 +57,7 @@ bool H264_Stream_Decode::decode() {
         throw std::runtime_error("Error sending a packet for decoding");
     }
 
-    while (ret >= 0) {
+    while (true) {
         ret = avcodec_receive_frame(dec_ctx, frame);
         if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
             return false;
@@ -99,6 +99,7 @@ bool H264_Stream_Decode::next() {
                 return false;
         }
     } while (!eof);
+    return false;
 }
 
 cv::Mat H264_Stream_Decode::get_frame() {
