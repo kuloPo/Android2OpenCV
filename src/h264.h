@@ -10,7 +10,7 @@ extern "C" {
 #include <libavutil/imgutils.h>
 }
 
-#define INBUF_SIZE 1024
+#define INBUF_SIZE 8192
 
 class H264_Stream_Decode {
 public:
@@ -26,16 +26,14 @@ private:
     FILE* f;
     const AVCodec* codec;
     AVCodecParserContext* parser;
-    AVCodecContext* dec_ctx = NULL;
+    AVCodecContext* dec_ctx;
     AVFrame* frame;
     uint8_t inbuf[INBUF_SIZE + AV_INPUT_BUFFER_PADDING_SIZE];
     uint8_t* data;
     size_t data_size;
-    int ret;
     int eof;
     AVPacket* pkt;
     SwsContext* sws_ctx;
     AVFrame* frame_BGR;
     unsigned char* frame_buffer;
-    cv::Mat img;
 };

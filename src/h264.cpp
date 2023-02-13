@@ -79,7 +79,7 @@ bool H264_Stream_Decode::next() {
             data = inbuf;
         }
         while (data_size > 0 || eof) {
-            ret = av_parser_parse2(parser, dec_ctx, &pkt->data, &pkt->size,
+            int ret = av_parser_parse2(parser, dec_ctx, &pkt->data, &pkt->size,
                 data, data_size, AV_NOPTS_VALUE, AV_NOPTS_VALUE, 0);
             if (ret < 0) {
                 throw std::runtime_error("Error while parsing");
